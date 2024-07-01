@@ -12,8 +12,10 @@ To set up the project on your local machine, follow these steps:
 
 ### Prerequisites
 
-- Node.js and npm
+- Node.js  16 or higher
 - Git (for cloning the repository)
+- Github account
+- Html and css knowledge
 
 ### Steps
 
