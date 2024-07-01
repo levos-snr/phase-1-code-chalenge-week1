@@ -1,4 +1,4 @@
-// Function to calculate demerit points based on speed
+// Function to calculate demerit points based on speed.
 function calculateDemeritPoints(speed) {
 	const speedLimit = 70;
 	const kmPerDemeritPoint = 5;
