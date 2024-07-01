@@ -95,6 +95,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---
 
+## Acknowledgments
+- We3schools.
+- Stack Overflow.
+  NB: Use KRA, NHIF, and NSSF values provided in the link below.
+  <hr/>
+- [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
+- [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
+
+
 ## Author Info
 
 - Linkedin - [@lewis-odero-developer](https://www.linkedin.com/in/lewis-odero-developer/)
