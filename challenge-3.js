@@ -1,4 +1,4 @@
-// Function to calculate PAYE
+// Calculate PAYE
 function calculatePAYE(grossSalary, isYearly) {
 	if (isYearly) {
 		if (grossSalary <= 288000) {
@@ -41,7 +41,7 @@ function calculatePAYE(grossSalary, isYearly) {
 	}
 }
 
-// Function to calculate NHIF deduction
+// NHIF deduction
 function calculateNHIF(grossSalary, isYearly) {
 	if (isYearly) grossSalary /= 12;
 	if (grossSalary <= 5999) return 150;
@@ -63,7 +63,7 @@ function calculateNHIF(grossSalary, isYearly) {
 	return 1700;
 }
 
-// Function to calculate NSSF deduction
+// NSSF deduction
 function calculateNSSF(grossSalary, isYearly) {
 	if (isYearly) grossSalary /= 12;
 	const tier1 = Math.min(grossSalary, 7000) * 0.06;
@@ -71,7 +71,7 @@ function calculateNSSF(grossSalary, isYearly) {
 	return tier1 + tier2;
 }
 
-// Function to calculate additional reliefs
+//  Additional reliefs
 function calculateReliefs(
 	disabilityExemption,
 	mortgageInterest,
@@ -79,28 +79,28 @@ function calculateReliefs(
 	homeOwnershipDeposit,
 	isYearly
 ) {
-	let totalRelief = isYearly ? 28800 : 2400; // Personal relief
+	let totalRelief = isYearly ? 28800 : 2400; 
 
 	if (disabilityExemption) {
-		totalRelief += isYearly ? 180000 : 150000 / 12; // Disability exemption
+		totalRelief += isYearly ? 180000 : 150000 / 12; 
 	}
 
 	if (mortgageInterest) {
-		totalRelief += Math.min(mortgageInterest, isYearly ? 300000 : 25000); // Mortgage interest
+		totalRelief += Math.min(mortgageInterest, isYearly ? 300000 : 25000); 
 	}
 
 	if (insurancePremium) {
-		totalRelief += Math.min(insurancePremium, isYearly ? 60000 : 5000); // Insurance relief
+		totalRelief += Math.min(insurancePremium, isYearly ? 60000 : 5000); 
 	}
 
 	if (homeOwnershipDeposit) {
-		totalRelief += Math.min(homeOwnershipDeposit, isYearly ? 108000 : 9000); // Home ownership savings plan
+		totalRelief += Math.min(homeOwnershipDeposit, isYearly ? 108000 : 9000); 
 	}
 
 	return totalRelief;
 }
 
-// Function to calculate net salary
+// Net salary
 function calculateNetSalary(
 	basicSalary,
 	benefits,
@@ -133,7 +133,7 @@ function calculateNetSalary(
 	};
 }
 
-// Function to prompt for salary details and display the net salary
+// Prompt for salary details and display net salary
 function promptSalaryDetails() {
 	const paymentPeriod = prompt("Is the payment period 'monthly' or 'yearly'?");
 	const isYearly = paymentPeriod.toLowerCase() === "yearly";
