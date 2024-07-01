@@ -1,0 +1,50 @@
+/* General body styling */
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f0f0f0;
+}
+
+/* Heading styling */
+h1 {
+	margin-bottom: 20px;
+	color: #333;
+}
+
+/* Button styling */
+button {
+	padding: 15px 30px;
+	margin: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+}
+
+button:nth-child(2) {
+	background-color: #4caf50; /* Green */
+	color: white;
+}
+
+button:nth-child(3) {
+	background-color: #2196f3; /* Blue */
+	color: white;
+}
+
+button:nth-child(4) {
+	background-color: #f44336; /* Red */
+	color: white;
+}
+
+/* Button hover effect */
+button:hover {
+	transform: scale(1.05);
+	opacity: 0.8;
+}
