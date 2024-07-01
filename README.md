@@ -101,8 +101,9 @@ SOFTWARE.
   <br>
 NB: Use KRA, NHIF, and NSSF values provided in the link below.
   <hr>
-   - [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
-   - [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
+  
+   - [Payroll tax rate](https://www.aren.co.ke/payroll/taxrates.htm)
+   - [Paye](https://www.kra.go.ke/en/individual/calculate-tax/calculating-tax/paye)
 
 
 ## Author Info
