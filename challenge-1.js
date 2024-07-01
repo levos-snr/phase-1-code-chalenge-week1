@@ -1,4 +1,4 @@
-// Function to Calculate grade based on student marks
+// Calculate grade based on student marks
 function generateGrade(marks) {
 	if (marks < 0 || marks > 100) {
 		return "Invalid marks. Please enter a number between 0 and 100.";
@@ -19,7 +19,7 @@ function generateGrade(marks) {
 	return grade;
 }
 
-// Prompt user for marks and display
+// Prompt user for marks and display grade
 function promptGrade() {
 	const marks = prompt("Enter the student's marks (0-100):");
 	const grade = generateGrade(Number(marks));
