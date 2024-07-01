@@ -98,10 +98,11 @@ SOFTWARE.
 ## Acknowledgments
 - We3schools.
 - Stack Overflow.
-  NB: Use KRA, NHIF, and NSSF values provided in the link below.
-  <hr/>
-- [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
-- [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
+  <br>
+NB: Use KRA, NHIF, and NSSF values provided in the link below.
+  <hr>
+   - [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
+   - [Live Demo Link](https://www.aren.co.ke/payroll/taxrates.htm)
 
 
 ## Author Info
