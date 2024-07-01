@@ -6,6 +6,8 @@ This repository contains three distinct coding challenges designed to test your 
 2. **Speed Detector**: An application to check if a given speed is within acceptable limits.
 3. **Net Salary Calculator**: A program to calculate net salary after various deductions.
 
+[URL LINK FOR DEMO ]('https://levos-snr.github.io/phase-1-code-chalenge-week1/')
+
 ## Installation
 
 To set up the project on your local machine, follow these steps:
