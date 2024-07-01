@@ -1,91 +1,189 @@
-// Constants for PAYE tax rates
-const PAYE_RATES = [
-	{ min: 0, max: 24000, rate: 0.1 },
-	{ min: 24001, max: 32333, rate: 0.25 },
-	{ min: 32334, max: 500000, rate: 0.3 },
-	{ min: 500001, max: 800000, rate: 0.325 },
-	{ min: 800001, max: Infinity, rate: 0.35 },
-];
-
-// NHIF rates
-const NHIF_RATES = [
-	{ min: 0, max: 5999, deduction: 150 },
-	{ min: 6000, max: 7999, deduction: 300 },
-	{ min: 8000, max: 11999, deduction: 400 },
-	{ min: 12000, max: 14999, deduction: 500 },
-	{ min: 15000, max: 19999, deduction: 600 },
-	{ min: 20000, max: 24999, deduction: 750 },
-	{ min: 25000, max: 29999, deduction: 850 },
-	{ min: 30000, max: 34999, deduction: 900 },
-	{ min: 35000, max: 39999, deduction: 950 },
-	{ min: 40000, max: 44999, deduction: 1000 },
-	{ min: 45000, max: 49999, deduction: 1100 },
-	{ min: 50000, max: 59999, deduction: 1200 },
-	{ min: 60000, max: 69999, deduction: 1300 },
-	{ min: 70000, max: 79999, deduction: 1400 },
-	{ min: 80000, max: 89999, deduction: 1500 },
-	{ min: 90000, max: 99999, deduction: 1600 },
-	{ min: 100000, max: Infinity, deduction: 1700 },
-];
-
-// NSSF rates
-const NSSF_RATE = 0.06;
-const TIER_I_LIMIT = 7000;
-const TIER_II_LIMIT = 36000;
-
-function calculateNHIF(grossSalary) {
-	for (let rate of NHIF_RATES) {
-		if (grossSalary >= rate.min && grossSalary <= rate.max) {
-			return rate.deduction;
+// Function to calculate PAYE
+function calculatePAYE(grossSalary, isYearly) {
+	if (isYearly) {
+		if (grossSalary <= 288000) {
+			return grossSalary * 0.1;
+		} else if (grossSalary <= 388000) {
+			return 28800 + (grossSalary - 288000) * 0.25;
+		} else if (grossSalary <= 6000000) {
+			return 28800 + 100000 * 0.25 + (grossSalary - 388000) * 0.3;
+		} else if (grossSalary <= 9600000) {
+			return (
+				28800 + 100000 * 0.25 + 5612000 * 0.3 + (grossSalary - 6000000) * 0.325
+			);
+		} else {
+			return (
+				28800 +
+				100000 * 0.25 +
+				5612000 * 0.3 +
+				3600000 * 0.325 +
+				(grossSalary - 9600000) * 0.35
+			);
+		}
+	} else {
+		if (grossSalary <= 24000) {
+			return grossSalary * 0.1;
+		} else if (grossSalary <= 32333) {
+			return 2400 + (grossSalary - 24000) * 0.25;
+		} else if (grossSalary <= 500000) {
+			return 2400 + 8333 * 0.25 + (grossSalary - 32333) * 0.3;
+		} else if (grossSalary <= 800000) {
+			return 2400 + 8333 * 0.25 + 467667 * 0.3 + (grossSalary - 500000) * 0.325;
+		} else {
+			return (
+				2400 +
+				8333 * 0.25 +
+				467667 * 0.3 +
+				300000 * 0.325 +
+				(grossSalary - 800000) * 0.35
+			);
 		}
 	}
-	return 0;
 }
 
-//Function to Calculate PAYE
-function calculatePAYE(grossSalary) {
-    let tax = 0;
-    for (let rate of PAYE_RATES) {
-        if (grossSalary > rate.min) {
-            const taxableAmount = Math.min(grossSalary, rate.max) - rate.min;
-            tax += taxableAmount * rate.rate;
-        }
-    }
-    return tax;
+// Function to calculate NHIF deduction
+function calculateNHIF(grossSalary, isYearly) {
+	if (isYearly) grossSalary /= 12;
+	if (grossSalary <= 5999) return 150;
+	if (grossSalary <= 7999) return 300;
+	if (grossSalary <= 11999) return 400;
+	if (grossSalary <= 14999) return 500;
+	if (grossSalary <= 19999) return 600;
+	if (grossSalary <= 24999) return 750;
+	if (grossSalary <= 29999) return 850;
+	if (grossSalary <= 34999) return 900;
+	if (grossSalary <= 39999) return 950;
+	if (grossSalary <= 44999) return 1000;
+	if (grossSalary <= 49999) return 1100;
+	if (grossSalary <= 59999) return 1200;
+	if (grossSalary <= 69999) return 1300;
+	if (grossSalary <= 79999) return 1400;
+	if (grossSalary <= 89999) return 1500;
+	if (grossSalary <= 99999) return 1600;
+	return 1700;
 }
 
-// Function to Calculate NSSF
-function calculateNSSF(basicSalary) {
-    const tierIContribution = Math.min(basicSalary, TIER_I_LIMIT) * NSSF_RATE;
-    const tierIIContribution = Math.min(Math.max(basicSalary - TIER_I_LIMIT, 0), TIER_II_LIMIT - TIER_I_LIMIT) * NSSF_RATE;
-    return tierIContribution + tierIIContribution;
+// Function to calculate NSSF deduction
+function calculateNSSF(grossSalary, isYearly) {
+	if (isYearly) grossSalary /= 12;
+	const tier1 = Math.min(grossSalary, 7000) * 0.06;
+	const tier2 = Math.min(Math.max(grossSalary - 7000, 0), 29000) * 0.06;
+	return tier1 + tier2;
 }
 
-// Calculate Net Salary
-function calculateNetSalary(basicSalary, benefits) {
-    const grossSalary = basicSalary + benefits;
-    const nssfDeductions = calculateNSSF(basicSalary);
-    const nhifDeductions = calculateNHIF(grossSalary);
-    const payeeTax = calculatePAYE(grossSalary);
+// Function to calculate additional reliefs
+function calculateReliefs(
+	disabilityExemption,
+	mortgageInterest,
+	insurancePremium,
+	homeOwnershipDeposit,
+	isYearly
+) {
+	let totalRelief = isYearly ? 28800 : 2400; // Personal relief
 
-    const netSalary = grossSalary - nssfDeductions - nhifDeductions - payeeTax;
-    return {
-        grossSalary,
-        nssfDeductions,
-        nhifDeductions,
-        payeeTax,
-        netSalary
-    };
+	if (disabilityExemption) {
+		totalRelief += isYearly ? 180000 : 150000 / 12; // Disability exemption
+	}
+
+	if (mortgageInterest) {
+		totalRelief += Math.min(mortgageInterest, isYearly ? 300000 : 25000); // Mortgage interest
+	}
+
+	if (insurancePremium) {
+		totalRelief += Math.min(insurancePremium, isYearly ? 60000 : 5000); // Insurance relief
+	}
+
+	if (homeOwnershipDeposit) {
+		totalRelief += Math.min(homeOwnershipDeposit, isYearly ? 108000 : 9000); // Home ownership savings plan
+	}
+
+	return totalRelief;
 }
 
-// Prompt user for inputs and display
+// Function to calculate net salary
+function calculateNetSalary(
+	basicSalary,
+	benefits,
+	disabilityExemption,
+	mortgageInterest,
+	insurancePremium,
+	homeOwnershipDeposit,
+	isYearly
+) {
+	const grossSalary = basicSalary + benefits;
+	const paye =
+		calculatePAYE(grossSalary, isYearly) -
+		calculateReliefs(
+			disabilityExemption,
+			mortgageInterest,
+			insurancePremium,
+			homeOwnershipDeposit,
+			isYearly
+		);
+	const nhif = calculateNHIF(grossSalary, isYearly);
+	const nssf = calculateNSSF(grossSalary, isYearly);
+	const netSalary = grossSalary - (paye + nhif + nssf);
+
+	return {
+		grossSalary,
+		paye,
+		nhif,
+		nssf,
+		netSalary,
+	};
+}
+
+// Function to prompt for salary details and display the net salary
 function promptSalaryDetails() {
-	const basicSalary = parseFloat(prompt("Enter your basic salary:"));
-	const benefits = parseFloat(prompt("Enter your benefits:"));
-
-	const { grossSalary, nssfDeductions, nhifDeductions, payeeTax, netSalary } =
-		calculateNetSalary(basicSalary, benefits);
-	alert(
-		`Gross Salary: ${grossSalary}\nNSSF Deductions: ${nssfDeductions}\nNHIF Deductions: ${nhifDeductions}\nPAYE Tax: ${payeeTax}\nNet Salary: ${netSalary}`
+	const paymentPeriod = prompt("Is the payment period 'monthly' or 'yearly'?");
+	const isYearly = paymentPeriod.toLowerCase() === "yearly";
+	const basicSalary = Number(
+		prompt(`Enter the basic salary${isYearly ? " (annual)" : ""}:`)
 	);
+	const benefits = Number(
+		prompt(`Enter the benefits${isYearly ? " (annual)" : ""}:`)
+	);
+	const disabilityExemption =
+		prompt(
+			"Do you have a disability exemption certificate? (yes/no)"
+		).toLowerCase() === "yes";
+	const mortgageInterest = disabilityExemption
+		? 0
+		: Number(
+				prompt(
+					`Enter the mortgage interest${isYearly ? " (annual)" : ""} (if any):`
+				)
+		  );
+	const insurancePremium = disabilityExemption
+		? 0
+		: Number(
+				prompt(
+					`Enter the insurance premium${isYearly ? " (annual)" : ""} (if any):`
+				)
+		  );
+	const homeOwnershipDeposit = disabilityExemption
+		? 0
+		: Number(
+				prompt(
+					`Enter the home ownership total deposit${
+						isYearly ? " (annual)" : ""
+					} (if any):`
+				)
+		  );
+
+	const { grossSalary, paye, nhif, nssf, netSalary } = calculateNetSalary(
+		basicSalary,
+		benefits,
+		disabilityExemption,
+		mortgageInterest,
+		insurancePremium,
+		homeOwnershipDeposit,
+		isYearly
+	);
+
+	alert(`Gross Salary: ${grossSalary.toFixed(2)}
+PAYE: ${paye.toFixed(2)}
+NHIF: ${nhif.toFixed(2)}
+NSSF: ${nssf.toFixed(2)}
+Net Salary: ${netSalary.toFixed(2)}`);
 }
