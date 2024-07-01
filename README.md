@@ -44,11 +44,13 @@ To run the application in your browser, you can use Live Server or any other loc
    ```
 2. Open your browser and navigate to the server address (e.g., `http://localhost:8080`).
 
-### Entering Prompts
-Each challenge requires user input through alert prompts:
-- Student Grade Generator: Enter the student's marks to receive a grade.
-- Speed Detector: Enter the speed to check if it is within the limits.
-- Net Salary Calculator: Follow the prompts to input salary details and deductions to calculate net salary.
+### Interacting with the Application
+Click the buttons on the main page to interact with the respective challenges:
+
+1. Enter Marks: Click to input marks and get the student's grade.
+2. Enter Speed: Click to input speed and check if it falls within acceptable limits.
+3. Calculate Net Salary: Click to input salary details and calculate the net salary after deductions.
+   
 
 ### Features
 - Student Grade Generator :
@@ -65,13 +67,6 @@ Each challenge requires user input through alert prompts:
         - Supports both monthly and yearly calculations.
         - Considers disability exemption, mortgage interest, insurance premium, and home ownership savings plan.
   
-### Interacting with the Application
-Click the buttons on the main page to interact with the respective challenges:
-
-1. Enter Marks: Click to input marks and get the student's grade.
-2. Enter Speed: Click to input speed and check if it falls within acceptable limits.
-3. Calculate Net Salary: Click to input salary details and calculate the net salary after deductions.
-   
 
 ### License
 
